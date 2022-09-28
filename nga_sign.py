@@ -134,8 +134,8 @@ class Nga_signin:
 
 
 if __name__ == '__main__':
-    uid = os.environ[NGA_UID]
-    token = os.environ[NGA_TOKEN]
+    uid = os.environ('NGA_UID')
+    token = os.environ('NGA_TOKEN')
     if uid and token:
         uid = uid.split('&')
         token = token.split('&')
