@@ -106,46 +106,44 @@ class Nga_signin:
         total = result['sum']
         return continued, total
     
-     def title(self):
-       data = {"all":"1",
+    def title(self):
+        data = {"all":"1",
             "access_token": self.token,
              "__output": "14",
             "t": round(time.time()),
             "access_uid": self.uid,
             "app_id": "1010"
             }
-        res = requests.post("https://ngabbs.com/nuke.php?__lib=load_topic&__act=load_topic_reply_ladder2", headers=headers,
-                        data=data, verify=False).content
+        res = requests.post("https://ngabbs.com/nuke.php?__lib=load_topic&__act=load_topic_reply_ladder2", headers=self.headers, data=data, verify=False).content
         es = json.loads(res)
-	s = []
-	it = next(iter(es['result']))[:3]
-	s.append(it[0]["tid"])
-	s.append(it[1]["tid"])
-	s.append(it[2]["tid"])
-	for ss in s:
-	    data2 = {
-	       "access_token": self.token,
-		"__output": "12",
-		"t": round(time.time()),
-	       "access_uid": self.uid,
-		"sign": "9917dc2cd0c494f065f62d814fd073a1",
-		"event": "5",
-		"app_id": "1010",
-		"tid": str(ss)
-	    }
-	    res = requests.post("https://ngabbs.com/nuke.php?__lib=data_query&__act=topic_share_log_v2", headers=headers,
-				data=data2, verify=False).content
-	data3 = {"access_token": self.token,
-		     "t": round(time.time()),
-		    "access_uid": self.uid,
-		     "app_id": "1010",
-		      "mid": "149",
-		     "__act": "check_mission",
-		     "__lib": "mission",
-		     "__output": "11"
-		     }
-	res = requests.post("https://ngabbs.com/nuke.php", headers=headers,data=data3, verify=False).content
-	print(json.loads(res))
+        s = []
+        it = next(iter(es['result']))[:3]
+        s.append(it[0]["tid"])
+        s.append(it[1]["tid"])
+        s.append(it[2]["tid"])
+        for ss in s:
+            data2 = {
+            "access_token": self.token,
+            "__output": "12",
+            "t": round(time.time()),
+            "access_uid": self.uid,
+            "sign": "9917dc2cd0c494f065f62d814fd073a1",
+            "event": "5",
+            "app_id": "1010",
+            "tid": str(ss)
+            }
+            res = requests.post("https://ngabbs.com/nuke.php?__lib=data_query&__act=topic_share_log_v2", headers=self.headers, data=data2, verify=False).content
+        data3 = {"access_token": self.token,
+                "t": round(time.time()),
+                "access_uid": self.uid,
+                "app_id": "1010",
+                "mid": "149",
+                "__act": "check_mission",
+                "__lib": "mission",
+                "__output": "11"
+                }
+        res = requests.post("https://ngabbs.com/nuke.php", headers=self.headers, data=data3, verify=False).content
+        print(json.loads(res))
         
     def get_user(self):
         data = {"access_token": self.token,
@@ -165,7 +163,7 @@ class Nga_signin:
 
     def start(self):
         req = self.signin()
-	re = self.title()
+        re = self.title()
         try:
                 continued, total = self.get_stat()
                 adtime = self.watchad()
