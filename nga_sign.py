@@ -143,7 +143,7 @@ class Nga_signin:
                 "__output": "11"
                 }
         res = requests.post("https://ngabbs.com/nuke.php", headers=self.headers, data=data3, verify=False).content
-        print(json.loads(res))
+  
         
     def get_user(self):
         data = {"access_token": self.token,
@@ -168,7 +168,7 @@ class Nga_signin:
                 continued, total = self.get_stat()
                 adtime = self.watchad()
                 adtimes,username,money,fuckmoney = self.get_user()
-                print(f'账号{self.num}:当前已连续签到{continued}天，总共签到{total}天，{adtime}，目前免广告时间直到{adtimes}，拥有铜币{money}个，N币{fuckmoney}个')
+                print(f'当前已连续签到{continued}天，总共签到{total}天，{adtime}，目前免广告时间直到{adtimes}，拥有铜币{money}个，N币{fuckmoney}个')
         except Exception as result:
             print(str(result))
 
